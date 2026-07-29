@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | Gerador de Etiquetas</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body class="pagina-login">
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <div class="login-logo">
+                <span>🏷️</span>
+            </div>
+
+            <h1>Gerador de Etiquetas</h1>
+
+            <p class="login-subtitulo">
+                Entre com o acesso da sua indústria
+            </p>
+
+            {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+                {% if mensagens %}
+
+                    <div class="mensagens">
+
+                        {% for categoria, mensagem in mensagens %}
+
+                            <div class="mensagem {{ categoria }}">
+                                {{ mensagem }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('login') }}">
+
+                <div class="campo">
+
+                    <label for="usuario">
+                        Usuário
+                    </label>
+
+                    <input
+                        type="text"
+                        id="usuario"
+                        name="usuario"
+                        placeholder="Digite seu usuário"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+                <div class="campo">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <div class="campo-senha">
+
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Digite sua senha"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="mostrar-senha"
+                            onclick="alternarSenha()"
+                            aria-label="Mostrar ou esconder senha"
+                        >
+                            👁️
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="botao-entrar">
+                    Entrar
+                </button>
+
+            </form>
+
+            <p class="login-rodape">
+                Acesso exclusivo para empresas autorizadas.
+            </p>
+
+        </section>
+
+    </main>
+
+    <script
+        src="{{ url_for('static', filename='js/app.js') }}"
+    ></script>
+
+</body>
+</html>

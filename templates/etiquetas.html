@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Etiquetas | {{ empresa }}</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body class="pagina-etiquetas">
+
+    <header class="topo-impressao">
+
+        <div>
+            <h1>Etiquetas geradas</h1>
+            <p>{{ empresa }}</p>
+        </div>
+
+        <div class="acoes-impressao">
+
+            <button
+                type="button"
+                class="botao-imprimir-pagina"
+                onclick="window.print()"
+            >
+                Imprimir
+            </button>
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="botao-voltar"
+            >
+                Voltar
+            </a>
+
+        </div>
+
+    </header>
+
+    <main class="area-etiquetas">
+
+        {% for numero in range(quantidade) %}
+
+            <section class="etiqueta">
+
+                <div class="etiqueta-produto">
+                    {{ produto["nome"] }}
+                </div>
+
+                <img
+                    src="{{ codigo_barras }}"
+                    alt="Código de barras {{ produto['ean'] }}"
+                    class="etiqueta-codigo"
+                >
+
+                <div class="etiqueta-ean">
+                    {{ produto["ean"] }}
+                </div>
+
+            </section>
+
+        {% endfor %}
+
+    </main>
+
+</body>
+</html>

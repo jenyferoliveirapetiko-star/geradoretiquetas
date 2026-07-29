@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{ empresa }} | Gerador de Etiquetas</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body class="pagina-dashboard">
+
+    <header class="topo">
+
+        <div>
+            <h1>Gerador de Etiquetas</h1>
+            <p>Empresa: {{ empresa }}</p>
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="botao-sair">
+            Sair
+        </a>
+
+    </header>
+
+    <main class="dashboard-container">
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+            {% if mensagens %}
+
+                <div class="mensagens">
+
+                    {% for categoria, mensagem in mensagens %}
+
+                        <div class="mensagem {{ categoria }}">
+                            {{ mensagem }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+        <section class="resumo">
+
+            <div class="resumo-card">
+
+                <span class="resumo-icone">📦</span>
+
+                <div>
+                    <p>Produtos cadastrados</p>
+                    <strong>{{ quantidade_produtos }}</strong>
+                </div>
+
+            </div>
+
+            <div class="resumo-card">
+
+                <span class="resumo-icone">🏷️</span>
+
+                <div>
+                    <p>Etiquetas geradas hoje</p>
+                    <strong>{{ etiquetas_hoje }}</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="painel">
+
+            <div class="painel-cabecalho">
+
+                <div>
+                    <h2>Importar planilha</h2>
+
+                    <p>
+                        Use uma planilha com as colunas
+                        ITEM e GTIN/EAN.
+                    </p>
+                </div>
+
+            </div>
+
+            <form
+                action="{{ url_for('importar') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                class="form-importar"
+            >
+
+                <input
+                    type="file"
+                    name="planilha"
+                    accept=".xlsx,.xlsm"
+                    required
+                >
+
+                <button type="submit" class="botao-principal">
+                    Importar
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="painel">
+
+            <div class="painel-cabecalho">
+
+                <div>
+                    <h2>Produtos</h2>
+
+                    <p>
+                        Pesquise pelo nome do produto ou pelo EAN.
+                    </p>
+                </div>
+
+            </div>
+
+            <form
+                method="GET"
+                action="{{ url_for('dashboard') }}"
+                class="form-pesquisa"
+            >
+
+                <input
+                    type="search"
+                    name="pesquisa"
+                    value="{{ pesquisa }}"
+                    placeholder="Digite o produto ou EAN"
+                >
+
+                <button type="submit" class="botao-principal">
+                    Pesquisar
+                </button>
+
+                {% if pesquisa %}
+
+                    <a
+                        href="{{ url_for('dashboard') }}"
+                        class="botao-secundario"
+                    >
+                        Limpar
+                    </a>
+
+                {% endif %}
+
+            </form>
+
+            {% if produtos %}
+
+                <div class="tabela-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Produto</th>
+                                <th>EAN</th>
+                                <th>Quantidade</th>
+                                <th>Ações</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for produto in produtos %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ produto["nome"] }}
+                                    </td>
+
+                                    <td>
+                                        {{ produto["ean"] }}
+                                    </td>
+
+                                    <td>
+
+                                        <form
+                                            action="{{ url_for('gerar_etiquetas') }}"
+                                            method="POST"
+                                            class="form-etiqueta"
+                                        >
+
+                                            <input
+                                                type="hidden"
+                                                name="produto_id"
+                                                value="{{ produto['id'] }}"
+                                            >
+
+                                            <input
+                                                type="number"
+                                                name="quantidade"
+                                                min="1"
+                                                max="5000"
+                                                value="1"
+                                                required
+                                            >
+
+                                            <button
+                                                type="submit"
+                                                class="botao-imprimir"
+                                            >
+                                                Gerar
+                                            </button>
+
+                                        </form>
+
+                                    </td>
+
+                                    <td>
+
+                                        <form
+                                            action="{{ url_for(
+                                                'excluir_produto',
+                                                produto_id=produto['id']
+                                            ) }}"
+                                            method="POST"
+                                            onsubmit="return confirmarExclusao();"
+                                        >
+
+                                            <button
+                                                type="submit"
+                                                class="botao-excluir"
+                                            >
+                                                Excluir
+                                            </button>
+
+                                        </form>
+
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <div class="estado-vazio">
+
+                    <span>📄</span>
+
+                    <h3>Nenhum produto encontrado</h3>
+
+                    <p>
+                        Importe uma planilha para começar.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+        <section class="painel">
+
+            <div class="painel-cabecalho">
+
+                <div>
+                    <h2>Histórico recente</h2>
+
+                    <p>
+                        Últimas gerações de etiquetas.
+                    </p>
+                </div>
+
+            </div>
+
+            {% if historico %}
+
+                <div class="tabela-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Produto</th>
+                                <th>EAN</th>
+                                <th>Quantidade</th>
+                                <th>Data</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for registro in historico %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ registro["produto"] }}
+                                    </td>
+
+                                    <td>
+                                        {{ registro["ean"] }}
+                                    </td>
+
+                                    <td>
+                                        {{ registro["quantidade"] }}
+                                    </td>
+
+                                    <td>
+                                        {{ registro["impresso_em"] }}
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <p class="sem-historico">
+                    Nenhuma etiqueta foi gerada ainda.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+    <script
+        src="{{ url_for('static', filename='js/app.js') }}"
+    ></script>
+
+</body>
+</html>

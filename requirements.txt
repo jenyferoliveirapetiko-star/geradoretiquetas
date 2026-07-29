@@ -1,0 +1,6 @@
+Flask
+openpyxl
+python-barcode
+Pillow
+gunicorn
+Werkzeug
