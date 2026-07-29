@@ -753,3 +753,171 @@ tbody tr:hover {
         padding: 14px;
     }
 }
+/* =========================================
+   ETIQUETAS 50 X 25 MM
+========================================= */
+
+.pagina-etiquetas {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: #e5e7eb;
+    color: #111827;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.topo-impressao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 30px;
+    background: #1f4e79;
+    color: #ffffff;
+}
+
+.topo-impressao h1 {
+    margin: 0 0 4px;
+    font-size: 24px;
+}
+
+.topo-impressao p {
+    margin: 0;
+    color: #dbeafe;
+}
+
+.acoes-impressao {
+    display: flex;
+    gap: 10px;
+}
+
+.botao-imprimir-pagina,
+.botao-voltar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 18px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.botao-imprimir-pagina {
+    background: #238636;
+    color: #ffffff;
+}
+
+.botao-voltar {
+    background: #ffffff;
+    color: #1f4e79;
+}
+
+.area-etiquetas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 24px;
+}
+
+.etiqueta-50x25 {
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 0 50mm;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50mm;
+    height: 25mm;
+    margin: 0;
+    padding: 1mm 2mm;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #b8b8b8;
+}
+
+.nome-produto-etiqueta {
+    box-sizing: border-box;
+    display: -webkit-box;
+    width: 100%;
+    height: 7mm;
+    margin: 0;
+    overflow: hidden;
+    color: #000000;
+    font-size: 8pt;
+    font-weight: bold;
+    line-height: 3.2mm;
+    text-align: center;
+    word-break: break-word;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.codigo-barras-etiqueta {
+    display: block;
+    width: 42mm;
+    height: 11mm;
+    margin: 0;
+    padding: 0;
+    object-fit: fill;
+}
+
+.numero-ean-etiqueta {
+    box-sizing: border-box;
+    width: 100%;
+    height: 4mm;
+    margin: 0;
+    overflow: hidden;
+    color: #000000;
+    font-size: 8pt;
+    line-height: 4mm;
+    letter-spacing: 0.4px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+@media print {
+    @page {
+        size: 50mm 25mm;
+        margin: 0;
+    }
+
+    html,
+    body {
+        width: 50mm;
+        min-width: 50mm;
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+    }
+
+    .topo-impressao {
+        display: none;
+    }
+
+    .area-etiquetas {
+        display: block;
+        width: 50mm;
+        margin: 0;
+        padding: 0;
+    }
+
+    .etiqueta-50x25 {
+        width: 50mm;
+        height: 25mm;
+        margin: 0;
+        padding: 1mm 2mm;
+        border: none;
+        page-break-inside: avoid;
+        page-break-after: always;
+        break-inside: avoid;
+        break-after: page;
+    }
+
+    .etiqueta-50x25:last-child {
+        page-break-after: auto;
+        break-after: auto;
+    }
+}

@@ -50,19 +50,19 @@
 
         {% for numero in range(quantidade) %}
 
-            <section class="etiqueta">
+            <section class="etiqueta-50x25">
 
-                <div class="etiqueta-produto">
+                <div class="nome-produto-etiqueta">
                     {{ produto["nome"] }}
                 </div>
 
                 <img
                     src="{{ codigo_barras }}"
                     alt="Código de barras {{ produto['ean'] }}"
-                    class="etiqueta-codigo"
+                    class="codigo-barras-etiqueta"
                 >
 
-                <div class="etiqueta-ean">
+                <div class="numero-ean-etiqueta">
                     {{ produto["ean"] }}
                 </div>
 

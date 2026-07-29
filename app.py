@@ -156,13 +156,13 @@ def gerar_codigo_barras(ean):
     memoria = io.BytesIO()
 
     opcoes = {
-        "module_width": 0.32,
-        "module_height": 15,
-        "quiet_zone": 2,
-        "font_size": 10,
-        "text_distance": 2,
-        "write_text": True,
-    }
+    "module_width": 0.30,
+    "module_height": 9,
+    "quiet_zone": 1,
+    "font_size": 0,
+    "text_distance": 0,
+    "write_text": False,
+}
 
     try:
         if len(ean) == 13:
