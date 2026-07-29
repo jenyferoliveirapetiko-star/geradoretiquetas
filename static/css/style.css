@@ -753,41 +753,61 @@ tbody tr:hover {
         padding: 14px;
     }
 }
-/* =========================================
- /* =========================================
-   ETIQUETA 100 X 25 MM
+//* =========================================
+   BOBINA 100 X 25 MM
+   2 ETIQUETAS DE 50 X 25 MM POR LINHA
 ========================================= */
 
+.pagina-etiquetas {
+    margin: 0;
+    padding: 0;
+    background: #e5e7eb;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .area-etiquetas {
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    gap: 12px;
-    padding: 24px;
+
+    width: 100mm;
+    margin: 0 auto;
+    padding: 0;
+
+    background: #ffffff;
 }
+
+/* Cada etiqueta individual */
 
 .etiqueta-50x25 {
     box-sizing: border-box;
+
     display: flex;
-    flex: 0 0 100mm;
+    flex: 0 0 50mm;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
 
-    width: 100mm;
+    width: 50mm;
     height: 25mm;
 
     margin: 0;
-    padding: 1mm 2mm;
+    padding: 1.2mm 2mm;
 
     overflow: hidden;
     background: #ffffff;
-    border: 1px solid #b8b8b8;
+    border: 1px solid #cccccc;
 }
+
+/* Nome do produto */
 
 .nome-produto-etiqueta {
     box-sizing: border-box;
-    width: 100%;
+
+    display: -webkit-box;
+
+    width: 46mm;
     height: 6mm;
 
     margin: 0;
@@ -796,31 +816,38 @@ tbody tr:hover {
     overflow: hidden;
 
     color: #000000;
-    font-size: 8pt;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 6pt;
     font-weight: bold;
-    line-height: 3mm;
+    line-height: 2.8mm;
     text-align: center;
+    word-break: break-word;
 
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
+
+/* Código de barras */
 
 .codigo-barras-etiqueta {
     display: block;
 
-    width: 80mm;
-    height: 14mm;
+    width: 38mm;
+    height: 12mm;
 
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
 
     object-fit: fill;
 }
 
+/* Número do EAN */
+
 .numero-ean-etiqueta {
     box-sizing: border-box;
-    width: 100%;
-    height: 3mm;
+
+    width: 46mm;
+    height: 4mm;
 
     margin: 0;
     padding: 0;
@@ -828,14 +855,20 @@ tbody tr:hover {
     overflow: hidden;
 
     color: #000000;
-    font-size: 7pt;
-    line-height: 3mm;
-    letter-spacing: 0.5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 6.5pt;
+    line-height: 4mm;
+    letter-spacing: 0.2px;
     text-align: center;
     white-space: nowrap;
 }
 
+/* =========================================
+   IMPRESSÃO
+========================================= */
+
 @media print {
+
     @page {
         size: 100mm 25mm;
         margin: 0;
@@ -843,39 +876,40 @@ tbody tr:hover {
 
     html,
     body {
-        width: 100mm;
-        margin: 0;
-        padding: 0;
-        background: #ffffff;
+        width: 100mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
     }
 
     .topo-impressao {
-        display: none;
+        display: none !important;
     }
 
     .area-etiquetas {
-        display: block;
-        width: 100mm;
-        margin: 0;
-        padding: 0;
+        display: flex !important;
+        flex-wrap: wrap !important;
+
+        width: 100mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .etiqueta-50x25 {
-        width: 100mm;
-        height: 25mm;
+        box-sizing: border-box !important;
 
-        margin: 0;
-        padding: 1mm 2mm;
-        border: none;
+        flex: 0 0 50mm !important;
 
-        page-break-inside: avoid;
-        page-break-after: always;
-        break-inside: avoid;
-        break-after: page;
-    }
+        width: 50mm !important;
+        height: 25mm !important;
 
-    .etiqueta-50x25:last-child {
-        page-break-after: auto;
-        break-after: auto;
+        margin: 0 !important;
+        padding: 1.2mm 2mm !important;
+
+        overflow: hidden !important;
+        border: none !important;
+
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
     }
 }
