@@ -48,49 +48,60 @@
 
     <main class="area-etiquetas">
 
-      {% for numero in range(quantidade) %}
+        {% for inicio in range(0, quantidade, 2) %}
 
-    <div class="linha-etiquetas">
+            <div class="folha-100x25">
 
-        <section class="etiqueta-50x25">
+                <section class="etiqueta-50x25">
 
-            <div class="nome-produto-etiqueta">
-                {{ produto["nome"] }}
+                    <div class="nome-produto-etiqueta">
+                        {{ produto["nome"] }}
+                    </div>
+
+                    <img
+                        src="{{ codigo_barras }}"
+                        alt="Código de barras {{ produto['ean'] }}"
+                        class="codigo-barras-etiqueta"
+                    >
+
+                    <div class="numero-ean-etiqueta">
+                        {{ produto["ean"] }}
+                    </div>
+
+                </section>
+
+                {% if inicio + 1 < quantidade %}
+
+                    <section class="etiqueta-50x25">
+
+                        <div class="nome-produto-etiqueta">
+                            {{ produto["nome"] }}
+                        </div>
+
+                        <img
+                            src="{{ codigo_barras }}"
+                            alt="Código de barras {{ produto['ean'] }}"
+                            class="codigo-barras-etiqueta"
+                        >
+
+                        <div class="numero-ean-etiqueta">
+                            {{ produto["ean"] }}
+                        </div>
+
+                    </section>
+
+                {% else %}
+
+                    <section
+                        class="etiqueta-50x25 etiqueta-vazia"
+                        aria-hidden="true"
+                    ></section>
+
+                {% endif %}
+
             </div>
 
-            <img
-                src="{{ codigo_barras }}"
-                alt="Código de barras {{ produto['ean'] }}"
-                class="codigo-barras-etiqueta"
-            >
-
-            <div class="numero-ean-etiqueta">
-                {{ produto["ean"] }}
-            </div>
-
-        </section>
-
-        <section class="etiqueta-50x25">
-
-            <div class="nome-produto-etiqueta">
-                {{ produto["nome"] }}
-            </div>
-
-            <img
-                src="{{ codigo_barras }}"
-                alt="Código de barras {{ produto['ean'] }}"
-                class="codigo-barras-etiqueta"
-            >
-
-            <div class="numero-ean-etiqueta">
-                {{ produto["ean"] }}
-            </div>
-
-        </section>
-
-    </div>
-
-{% endfor %}
+        {% endfor %}
 
     </main>
 

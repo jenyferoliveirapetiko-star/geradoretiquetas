@@ -1,123 +1,150 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
+/* =========================================
+   CONFIGURAÇÕES GERAIS
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-    background:#f3f5f9;
+body {
+    background: #f3f5f9;
 }
 
-.pagina-login{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
+/* =========================================
+   LOGIN
+========================================= */
+
+.pagina-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
 }
 
-.login-card{
-    width:420px;
-    background:#ffffff;
-    border-radius:15px;
-    padding:40px;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
+.login-card {
+    width: 420px;
+    max-width: 100%;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-.login-logo{
-    text-align:center;
-    font-size:55px;
-    margin-bottom:15px;
+.login-logo {
+    margin-bottom: 15px;
+    font-size: 55px;
+    text-align: center;
 }
 
-.login-card h1{
-    text-align:center;
-    color:#1f4e79;
-    margin-bottom:10px;
+.login-card h1 {
+    margin-bottom: 10px;
+    color: #1f4e79;
+    text-align: center;
 }
 
-.login-subtitulo{
-    text-align:center;
-    color:#666;
-    margin-bottom:30px;
+.login-subtitulo {
+    margin-bottom: 30px;
+    color: #666666;
+    text-align: center;
 }
 
-.campo{
-    margin-bottom:20px;
+.campo {
+    margin-bottom: 20px;
 }
 
-.campo label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:bold;
+.campo label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
 }
 
-.campo input{
-    width:100%;
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    font-size:15px;
+.campo input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 15px;
 }
 
-.campo-senha{
-    display:flex;
+.campo input:focus {
+    outline: none;
+    border-color: #1f4e79;
+    box-shadow: 0 0 0 3px rgba(31, 78, 121, 0.12);
 }
 
-.campo-senha input{
-    border-radius:8px 0 0 8px;
+.campo-senha {
+    display: flex;
 }
 
-.mostrar-senha{
-    width:55px;
-    border:none;
-    background:#1f4e79;
-    color:white;
-    cursor:pointer;
-    border-radius:0 8px 8px 0;
+.campo-senha input {
+    border-radius: 8px 0 0 8px;
 }
 
-.botao-entrar{
-    width:100%;
-    padding:14px;
-    background:#1f4e79;
-    color:white;
-    border:none;
-    border-radius:8px;
-    font-size:17px;
-    cursor:pointer;
-    transition:.3s;
+.mostrar-senha {
+    width: 55px;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    background: #1f4e79;
+    color: #ffffff;
+    cursor: pointer;
 }
 
-.botao-entrar:hover{
-    background:#163b5d;
+.botao-entrar {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #1f4e79;
+    color: #ffffff;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.login-rodape{
-    text-align:center;
-    color:#777;
-    margin-top:20px;
-    font-size:13px;
+.botao-entrar:hover {
+    background: #163b5d;
 }
 
-.mensagem{
-    padding:12px;
-    border-radius:8px;
-    margin-bottom:20px;
+.login-rodape {
+    margin-top: 20px;
+    color: #777777;
+    font-size: 13px;
+    text-align: center;
 }
 
-.sucesso{
-    background:#d4edda;
-    color:#155724;
+/* =========================================
+   MENSAGENS
+========================================= */
+
+.mensagens {
+    margin-bottom: 20px;
 }
 
-.erro{
-    background:#f8d7da;
-    color:#721c24;
+.mensagem {
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 8px;
 }
-/* =========================
+
+.mensagem.sucesso,
+.sucesso {
+    background: #d4edda;
+    color: #155724;
+}
+
+.mensagem.erro,
+.erro {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* =========================================
    DASHBOARD
-========================= */
+========================================= */
 
 .pagina-dashboard {
     min-height: 100vh;
@@ -154,8 +181,8 @@ body{
     border: 1px solid rgba(255, 255, 255, 0.45);
     border-radius: 8px;
     color: #ffffff;
-    text-decoration: none;
     font-weight: bold;
+    text-decoration: none;
     transition: 0.2s;
 }
 
@@ -237,8 +264,8 @@ body{
 .form-pesquisa {
     display: flex;
     align-items: center;
-    gap: 12px;
     flex-wrap: wrap;
+    gap: 12px;
 }
 
 .form-importar input[type="file"] {
@@ -272,9 +299,9 @@ body{
 .botao-excluir {
     border: none;
     border-radius: 8px;
-    cursor: pointer;
     font-weight: bold;
     text-decoration: none;
+    cursor: pointer;
     transition: 0.2s;
 }
 
@@ -370,8 +397,8 @@ tbody tr:hover {
 
 .estado-vazio {
     padding: 45px 20px;
-    text-align: center;
     color: #6b7280;
+    text-align: center;
 }
 
 .estado-vazio span {
@@ -390,7 +417,279 @@ tbody tr:hover {
     color: #6b7280;
 }
 
-@media (max-width: 760px) {
+/* =========================================
+   TELA DE ETIQUETAS
+========================================= */
+
+.pagina-etiquetas {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.topo-impressao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 30px;
+    background: #1f4e79;
+    color: #ffffff;
+}
+
+.topo-impressao h1 {
+    margin: 0 0 4px;
+    font-size: 24px;
+}
+
+.topo-impressao p {
+    margin: 0;
+    color: #dbeafe;
+}
+
+.acoes-impressao {
+    display: flex;
+    gap: 10px;
+}
+
+.botao-imprimir-pagina,
+.botao-voltar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 18px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.botao-imprimir-pagina {
+    background: #238636;
+    color: #ffffff;
+}
+
+.botao-imprimir-pagina:hover {
+    background: #176c2b;
+}
+
+.botao-voltar {
+    background: #ffffff;
+    color: #1f4e79;
+}
+
+.botao-voltar:hover {
+    background: #e5e7eb;
+}
+
+/* A folha completa mede 100 x 25 mm */
+
+.area-etiquetas {
+    display: block;
+    width: 100mm;
+    margin: 24px auto;
+    padding: 0;
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+}
+
+/* Cada fileira física da bobina */
+
+.folha-100x25 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100mm;
+    height: 25mm;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #ffffff;
+    border-bottom: 1px dashed #bbbbbb;
+}
+
+/* Cada adesivo mede 50 x 25 mm */
+
+.etiqueta-50x25 {
+    display: grid;
+    flex: 0 0 50mm;
+    grid-template-rows: 5mm 14mm 4mm;
+    align-items: center;
+    justify-items: center;
+    width: 50mm;
+    height: 25mm;
+    margin: 0;
+    padding: 1mm 2mm;
+    overflow: hidden;
+    background: #ffffff;
+    border-right: 1px dashed #cccccc;
+}
+
+.etiqueta-50x25:nth-child(2) {
+    border-right: none;
+}
+
+.nome-produto-etiqueta {
+    display: block;
+    width: 46mm;
+    height: 5mm;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    color: #000000;
+    font-size: 6pt;
+    font-weight: bold;
+    line-height: 2.4mm;
+    text-align: center;
+    text-overflow: ellipsis;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.codigo-barras-etiqueta {
+    display: block;
+    width: 40mm;
+    height: 14mm;
+    margin: 0 auto;
+    padding: 0;
+    object-fit: fill;
+}
+
+.numero-ean-etiqueta {
+    width: 46mm;
+    height: 4mm;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    color: #000000;
+    font-size: 6.5pt;
+    line-height: 4mm;
+    letter-spacing: 0.3px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.etiqueta-vazia {
+    background: #ffffff;
+}
+
+/* =========================================
+   IMPRESSÃO
+   PAPEL: 100 X 25 MM
+   2 ETIQUETAS DE 50 X 25 MM
+========================================= */
+
+@media print {
+
+    @page {
+        size: 100mm 25mm;
+        margin: 0;
+    }
+
+    html,
+    body {
+        width: 100mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        background: #ffffff !important;
+    }
+
+    .pagina-etiquetas {
+        width: 100mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+    }
+
+    .topo-impressao {
+        display: none !important;
+    }
+
+    .area-etiquetas {
+        display: block !important;
+        width: 100mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        background: #ffffff !important;
+    }
+
+    .folha-100x25 {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+
+        width: 100mm !important;
+        height: 25mm !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        overflow: hidden !important;
+        border: none !important;
+
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+
+        break-after: page !important;
+        page-break-after: always !important;
+    }
+
+    .folha-100x25:last-child {
+        break-after: auto !important;
+        page-break-after: auto !important;
+    }
+
+    .etiqueta-50x25 {
+        display: grid !important;
+        flex: 0 0 50mm !important;
+        grid-template-rows: 5mm 14mm 4mm !important;
+
+        width: 50mm !important;
+        height: 25mm !important;
+
+        margin: 0 !important;
+        padding: 1mm 2mm !important;
+
+        overflow: hidden !important;
+        border: none !important;
+
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .nome-produto-etiqueta {
+        width: 46mm !important;
+        height: 5mm !important;
+        font-size: 6pt !important;
+        line-height: 2.4mm !important;
+    }
+
+    .codigo-barras-etiqueta {
+        width: 40mm !important;
+        height: 14mm !important;
+    }
+
+    .numero-ean-etiqueta {
+        width: 46mm !important;
+        height: 4mm !important;
+        font-size: 6.5pt !important;
+        line-height: 4mm !important;
+    }
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media screen and (max-width: 760px) {
+
     .topo {
         align-items: flex-start;
         padding: 20px;
@@ -430,148 +729,7 @@ tbody tr:hover {
         width: 100%;
         text-align: center;
     }
-}
-/* =========================
-   IMPRESSÃO DE ETIQUETAS
-========================= */
 
-.pagina-etiquetas {
-    min-height: 100vh;
-    background: #eef2f6;
-    color: #111827;
-}
-
-.topo-impressao {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 32px;
-    background: #1f4e79;
-    color: #ffffff;
-}
-
-.topo-impressao h1 {
-    margin-bottom: 4px;
-    font-size: 24px;
-}
-
-.topo-impressao p {
-    color: #dbeafe;
-}
-
-.acoes-impressao {
-    display: flex;
-    gap: 10px;
-}
-
-.botao-imprimir-pagina,
-.botao-voltar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 11px 18px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.botao-imprimir-pagina {
-    background: #238636;
-    color: #ffffff;
-}
-
-.botao-imprimir-pagina:hover {
-    background: #176c2b;
-}
-
-.botao-voltar {
-    background: #ffffff;
-    color: #1f4e79;
-}
-
-.botao-voltar:hover {
-    background: #e5e7eb;
-}
-
-.area-etiquetas {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 14px;
-    padding: 24px;
-}
-
-.etiqueta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 150px;
-    padding: 12px;
-    background: #ffffff;
-    border: 1px dashed #6b7280;
-    page-break-inside: avoid;
-    overflow: hidden;
-}
-
-.etiqueta-produto {
-    width: 100%;
-    margin-bottom: 6px;
-    overflow: hidden;
-    color: #111827;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.etiqueta-codigo {
-    display: block;
-    width: 100%;
-    max-width: 250px;
-    height: 82px;
-    object-fit: contain;
-}
-
-.etiqueta-ean {
-    margin-top: 2px;
-    color: #111827;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    letter-spacing: 1px;
-    text-align: center;
-}
-
-@media print {
-    @page {
-        margin: 5mm;
-    }
-
-    body {
-        background: #ffffff;
-    }
-
-    .topo-impressao {
-        display: none;
-    }
-
-    .area-etiquetas {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 3mm;
-        padding: 0;
-    }
-
-    .etiqueta {
-        min-height: 45mm;
-        border: 1px solid #d1d5db;
-    }
-}
-
-@media (max-width: 700px) {
     .topo-impressao {
         align-items: flex-start;
         flex-direction: column;
@@ -588,328 +746,7 @@ tbody tr:hover {
     }
 
     .area-etiquetas {
-        grid-template-columns: 1fr;
-        padding: 14px;
-    }
-}
-/* =========================
-   IMPRESSÃO DE ETIQUETAS
-========================= */
-
-.pagina-etiquetas {
-    min-height: 100vh;
-    background: #eef2f6;
-    color: #111827;
-}
-
-.topo-impressao {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 32px;
-    background: #1f4e79;
-    color: #ffffff;
-}
-
-.topo-impressao h1 {
-    margin-bottom: 4px;
-    font-size: 24px;
-}
-
-.topo-impressao p {
-    color: #dbeafe;
-}
-
-.acoes-impressao {
-    display: flex;
-    gap: 10px;
-}
-
-.botao-imprimir-pagina,
-.botao-voltar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 11px 18px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.botao-imprimir-pagina {
-    background: #238636;
-    color: #ffffff;
-}
-
-.botao-imprimir-pagina:hover {
-    background: #176c2b;
-}
-
-.botao-voltar {
-    background: #ffffff;
-    color: #1f4e79;
-}
-
-.botao-voltar:hover {
-    background: #e5e7eb;
-}
-
-.area-etiquetas {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 14px;
-    padding: 24px;
-}
-
-.etiqueta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 150px;
-    padding: 12px;
-    background: #ffffff;
-    border: 1px dashed #6b7280;
-    page-break-inside: avoid;
-    overflow: hidden;
-}
-
-.etiqueta-produto {
-    width: 100%;
-    margin-bottom: 6px;
-    overflow: hidden;
-    color: #111827;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.etiqueta-codigo {
-    display: block;
-    width: 100%;
-    max-width: 250px;
-    height: 82px;
-    object-fit: contain;
-}
-
-.etiqueta-ean {
-    margin-top: 2px;
-    color: #111827;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    letter-spacing: 1px;
-    text-align: center;
-}
-
-@media print {
-    @page {
-        margin: 5mm;
-    }
-
-    body {
-        background: #ffffff;
-    }
-
-    .topo-impressao {
-        display: none;
-    }
-
-    .area-etiquetas {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 3mm;
-        padding: 0;
-    }
-
-    .etiqueta {
-        min-height: 45mm;
-        border: 1px solid #d1d5db;
-    }
-}
-
-@media (max-width: 700px) {
-    .topo-impressao {
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 18px;
-    }
-
-    .acoes-impressao {
-        width: 100%;
-    }
-
-    .botao-imprimir-pagina,
-    .botao-voltar {
-        flex: 1;
-    }
-
-    .area-etiquetas {
-        grid-template-columns: 1fr;
-        padding: 14px;
-    }
-}
-//* =========================================
-   BOBINA 100 X 25 MM
-   2 ETIQUETAS DE 50 X 25 MM POR LINHA
-========================================= */
-
-.pagina-etiquetas {
-    margin: 0;
-    padding: 0;
-    background: #e5e7eb;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.area-etiquetas {
-    box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-
-    width: 100mm;
-    margin: 0 auto;
-    padding: 0;
-
-    background: #ffffff;
-}
-
-/* Cada etiqueta individual */
-
-.etiqueta-50x25 {
-    box-sizing: border-box;
-
-    display: flex;
-    flex: 0 0 50mm;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-
-    width: 50mm;
-    height: 25mm;
-
-    margin: 0;
-    padding: 1.2mm 2mm;
-
-    overflow: hidden;
-    background: #ffffff;
-    border: 1px solid #cccccc;
-}
-
-/* Nome do produto */
-
-.nome-produto-etiqueta {
-    box-sizing: border-box;
-
-    display: -webkit-box;
-
-    width: 46mm;
-    height: 6mm;
-
-    margin: 0;
-    padding: 0;
-
-    overflow: hidden;
-
-    color: #000000;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 6pt;
-    font-weight: bold;
-    line-height: 2.8mm;
-    text-align: center;
-    word-break: break-word;
-
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-}
-
-/* Código de barras */
-
-.codigo-barras-etiqueta {
-    display: block;
-
-    width: 38mm;
-    height: 12mm;
-
-    margin: 0 auto;
-    padding: 0;
-
-    object-fit: fill;
-}
-
-/* Número do EAN */
-
-.numero-ean-etiqueta {
-    box-sizing: border-box;
-
-    width: 46mm;
-    height: 4mm;
-
-    margin: 0;
-    padding: 0;
-
-    overflow: hidden;
-
-    color: #000000;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 6.5pt;
-    line-height: 4mm;
-    letter-spacing: 0.2px;
-    text-align: center;
-    white-space: nowrap;
-}
-
-/* =========================================
-   IMPRESSÃO
-========================================= */
-
-@media print {
-
-    @page {
-        size: 100mm 25mm;
-        margin: 0;
-    }
-
-    html,
-    body {
-        width: 100mm !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        background: #ffffff !important;
-    }
-
-    .topo-impressao {
-        display: none !important;
-    }
-
-    .area-etiquetas {
-        display: flex !important;
-        flex-wrap: wrap !important;
-
-        width: 100mm !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    .etiqueta-50x25 {
-        box-sizing: border-box !important;
-
-        flex: 0 0 50mm !important;
-
-        width: 50mm !important;
-        height: 25mm !important;
-
-        margin: 0 !important;
-        padding: 1.2mm 2mm !important;
-
-        overflow: hidden !important;
-        border: none !important;
-
-        break-inside: avoid !important;
-        page-break-inside: avoid !important;
+        margin: 14px 0;
+        transform-origin: top left;
     }
 }
