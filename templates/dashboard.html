@@ -160,97 +160,141 @@
 
             </form>
 
-            {% if produtos %}
+  {% if produtos %}
 
-                <div class="tabela-container">
+    <form
+        id="form-etiquetas-lote"
+        action="{{ url_for('gerar_etiquetas') }}"
+        method="POST"
+        class="form-lote"
+    >
 
-                    <table>
+        <div class="acoes-lote">
 
-                        <thead>
+            <label class="selecionar-todos">
 
-                            <tr>
-                                <th>Produto</th>
-                                <th>EAN</th>
-                                <th>Quantidade</th>
-                                <th>Ações</th>
-                            </tr>
+                <input
+                    type="checkbox"
+                    id="marcar-todos"
+                >
 
-                        </thead>
+                Selecionar todos
 
-                        <tbody>
+            </label>
 
-                            {% for produto in produtos %}
+            <button
+                type="submit"
+                class="botao-principal"
+            >
+                Gerar etiquetas selecionadas
+            </button>
 
-                                <tr>
+        </div>
 
-                                    <td>
-                                        {{ produto["nome"] }}
-                                    </td>
+    </form>
 
-                                    <td>
-                                        {{ produto["ean"] }}
-                                    </td>
+    <div class="tabela-container">
 
-                                    <td>
+        <table>
 
-                                        <form
-                                            action="{{ url_for('gerar_etiquetas') }}"
-                                            method="POST"
-                                            class="form-etiqueta"
-                                        >
+            <thead>
 
-                                            <input
-                                                type="hidden"
-                                                name="produto_id"
-                                                value="{{ produto['id'] }}"
-                                            >
+                <tr>
+                    <th>Selecionar</th>
+                    <th>Produto</th>
+                    <th>EAN</th>
+                    <th>Quantidade</th>
+                    <th>Ações</th>
+                </tr>
 
-                                            <input
-                                                type="number"
-                                                name="quantidade"
-                                                min="1"
-                                                max="5000"
-                                                value="1"
-                                                required
-                                            >
+            </thead>
 
-                                            <button
-                                                type="submit"
-                                                class="botao-imprimir"
-                                            >
-                                                Gerar
-                                            </button>
+            <tbody>
 
-                                        </form>
+                {% for produto in produtos %}
 
-                                    </td>
+                    <tr>
 
-                                    <td>
+                        <td>
 
-                                        <form
-                                            action="{{ url_for(
-                                                'excluir_produto',
-                                                produto_id=produto['id']
-                                            ) }}"
-                                            method="POST"
-                                            onsubmit="return confirmarExclusao();"
-                                        >
+                            <input
+                                type="checkbox"
+                                name="produtos_selecionados"
+                                value="{{ produto['id'] }}"
+                                class="checkbox-produto"
+                                form="form-etiquetas-lote"
+                            >
 
-                                            <button
-                                                type="submit"
-                                                class="botao-excluir"
-                                            >
-                                                Excluir
-                                            </button>
+                        </td>
 
-                                        </form>
+                        <td>
+                            {{ produto["nome"] }}
+                        </td>
 
-                                    </td>
+                        <td>
+                            {{ produto["ean"] }}
+                        </td>
 
-                                </tr>
+                        <td>
 
-                            {% endfor %}
+                            <input
+                                type="number"
+                                name="quantidade_{{ produto['id'] }}"
+                                min="1"
+                                max="5000"
+                                value="1"
+                                class="quantidade-produto"
+                                form="form-etiquetas-lote"
+                            >
 
+                        </td>
+
+                        <td>
+
+                            <form
+                                action="{{ url_for(
+                                    'excluir_produto',
+                                    produto_id=produto['id']
+                                ) }}"
+                                method="POST"
+                                onsubmit="return confirmarExclusao();"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="botao-excluir"
+                                >
+                                    Excluir
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+{% else %}
+
+    <div class="estado-vazio">
+
+        <span>📄</span>
+
+        <h3>Nenhum produto encontrado</h3>
+
+        <p>
+            Importe uma planilha para começar.
+        </p>
+
+    </div>
+{% endif %}
                         </tbody>
 
                     </table>

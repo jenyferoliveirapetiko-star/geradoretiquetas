@@ -486,74 +486,105 @@ def excluir_produto(produto_id):
 
     flash(f'Produto "{produto["nome"]}" excluído.', "sucesso")
     return redirect(url_for("dashboard"))
-
-
 @app.route("/gerar-etiquetas", methods=["POST"])
 @login_obrigatorio
 def gerar_etiquetas():
-    produto_id = request.form.get("produto_id", type=int)
-    quantidade = request.form.get("quantidade", type=int)
-
-    if not produto_id:
-        flash("Selecione um produto.", "erro")
-        return redirect(url_for("dashboard"))
-
-    if not quantidade or quantidade < 1 or quantidade > 5000:
-        flash("Informe uma quantidade entre 1 e 5.000.", "erro")
-        return redirect(url_for("dashboard"))
-
     empresa = session["empresa"]
 
+    # Recebe todos os produtos marcados na tela.
+    produtos_ids = request.form.getlist("produtos_selecionados")
+
+    if not produtos_ids:
+        flash("Selecione pelo menos um produto.", "erro")
+        return redirect(url_for("dashboard"))
+
+    etiquetas = []
+    produtos_processados = 0
+    total_etiquetas = 0
+
     with conectar_banco() as conexao:
-        produto = conexao.execute(
-            """
-            SELECT nome, ean
-            FROM produtos
-            WHERE id = ? AND empresa = ?
-            """,
-            (produto_id, empresa),
-        ).fetchone()
+        for produto_id_texto in produtos_ids:
+            try:
+                produto_id = int(produto_id_texto)
+            except (TypeError, ValueError):
+                continue
 
-        if not produto:
-            flash("Produto não encontrado.", "erro")
-            return redirect(url_for("dashboard"))
-
-        conexao.execute(
-            """
-            INSERT INTO historico (
-                empresa,
-                produto,
-                ean,
-                quantidade,
-                impresso_em
+            # Cada produto possui seu próprio campo de quantidade.
+            quantidade = request.form.get(
+                f"quantidade_{produto_id}",
+                type=int,
             )
-            VALUES (?, ?, ?, ?, ?)
-            """,
-            (
-                empresa,
-                produto["nome"],
-                produto["ean"],
-                quantidade,
-                datetime.now().isoformat(
-                    sep=" ",
-                    timespec="seconds",
+
+            if not quantidade or quantidade < 1 or quantidade > 5000:
+                flash(
+                    "Todas as quantidades devem estar entre 1 e 5.000.",
+                    "erro",
+                )
+                return redirect(url_for("dashboard"))
+
+            produto = conexao.execute(
+                """
+                SELECT id, nome, ean
+                FROM produtos
+                WHERE id = ? AND empresa = ?
+                """,
+                (produto_id, empresa),
+            ).fetchone()
+
+            if not produto:
+                continue
+
+            codigo_barras = gerar_codigo_barras(produto["ean"])
+
+            # Adiciona cada etiqueta individualmente à lista de impressão.
+            for _ in range(quantidade):
+                etiquetas.append(
+                    {
+                        "nome": produto["nome"],
+                        "ean": produto["ean"],
+                        "codigo_barras": codigo_barras,
+                    }
+                )
+
+            conexao.execute(
+                """
+                INSERT INTO historico (
+                    empresa,
+                    produto,
+                    ean,
+                    quantidade,
+                    impresso_em
+                )
+                VALUES (?, ?, ?, ?, ?)
+                """,
+                (
+                    empresa,
+                    produto["nome"],
+                    produto["ean"],
+                    quantidade,
+                    datetime.now().isoformat(
+                        sep=" ",
+                        timespec="seconds",
+                    ),
                 ),
-            ),
-        )
+            )
+
+            produtos_processados += 1
+            total_etiquetas += quantidade
 
         conexao.commit()
 
-    codigo_barras = gerar_codigo_barras(produto["ean"])
+    if not etiquetas:
+        flash("Nenhum produto válido foi selecionado.", "erro")
+        return redirect(url_for("dashboard"))
 
     return render_template(
         "etiquetas.html",
         empresa=empresa,
-        produto=produto,
-        quantidade=quantidade,
-        codigo_barras=codigo_barras,
+        etiquetas=etiquetas,
+        produtos_processados=produtos_processados,
+        total_etiquetas=total_etiquetas,
     )
-
-
 @app.errorhandler(413)
 def arquivo_grande(_erro):
     flash("O arquivo é muito grande. O limite é 10 MB.", "erro")
